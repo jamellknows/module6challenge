@@ -87,4 +87,12 @@ li:nth-child(odd) {
   right: 10px;
 }
 
-@media screen and ()
+.center{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+
+  
+  
+}
+
