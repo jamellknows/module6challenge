@@ -124,14 +124,21 @@ else{
 function Tally()
 {
     let e = document.getElementById("answers")
+    console.log(`For ${questionNumber} the correct answer is ${answersArr[questionNumber-1]}`)
     if(e === null){
         return 
     }
     let option = e.value 
-    if(answersArr[questionNumber] == option)
+    if(answersArr[questionNumber-2] == option)
     {
-        score ++
-        console.log(score)
+        score++
+        console.log(`You were correct your score is ${score}`)
+    }
+    if(answersArr[questionNumber-2] != option)
+    {
+        score--
+        console.log(`You were not correct your score is ${score}`)
+
     }
     // check if right score against the answer 
 }
