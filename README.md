@@ -1,7 +1,8 @@
 # Module 6 Challenge: Code Quiz
 ## Overview
 
-coming soom!
+This is a coding quiz for students of front end development to test their understanding. 
+It is written in HTML, CSS and JavaScript. 
 
 
 
