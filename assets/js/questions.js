@@ -69,7 +69,15 @@ function questions()
     timer = setInterval(function(){
         time++
         timeEl.textContent =`${time}`
+        if(time == 120)
+        {
+            clearInterval(timer)
+            alert("You have run out of time!!")
+            location.reload()
+    
+        }
     }, 1000)
+ 
  
   
 
@@ -78,6 +86,8 @@ function questions()
 
 function renderQuestions()
 {
+    
+    
    
  
     nextQuestionEl.innerText = "Next Question"
@@ -94,8 +104,7 @@ function renderQuestions()
     let question2 = JSON.stringify(Object.values(questionsObj[questionNumber])[0][1])
     let question3 = JSON.stringify(Object.values(questionsObj[questionNumber])[0][2])
     let question4 = JSON.stringify(Object.values(questionsObj[questionNumber])[0][3])
-    Tally()
-  
+    
 
    
 
@@ -113,8 +122,8 @@ function renderQuestions()
     <option value="4">${question4}</option>
     </select>
     </form>`
-
-}
+    }
+  
 
 nextQuestionEl.addEventListener('click', function()
 {
@@ -134,8 +143,7 @@ nextQuestionEl.addEventListener('click', function()
         buttonsEl.appendChild(submitTestEl)
     }
     
-    // on click get value if on last question submit button 
-    // check if right answer store value summate
+
 
 
 
@@ -174,7 +182,6 @@ function Tally()
         if(answersArr[questionNumber-2] == option)
         {
             score=score+20
-            // playCorrect()
             
          
 
@@ -182,9 +189,6 @@ function Tally()
         if(answersArr[questionNumber-2] != option)
         {
             score=score-10
-            // playIncorrect()
-
-    
         }
 
     }
@@ -201,8 +205,6 @@ function Calculate()
     finalScoreEl.textContent = `${score}`
     
 
-  
-    
 }
 submitTestEl.addEventListener('click', Calculate)
 submitInitialsEl.addEventListener('click', Store)
@@ -210,8 +212,7 @@ submitInitialsEl.addEventListener('click', Store)
 function Store()
 {
     let initials = initalsEl.value
-    let cqs 
-    // so make an object that 
+    
     if(typeof codingQuizScores === 'object')
     {
     
@@ -227,11 +228,7 @@ function Store()
 
       
     }
-    // let cqs = JSON.parse(codingQuizScores)
-  
-
-    // localStorage.setItem("codingQuizScores", cqs)
-    
+   
     
 
 
