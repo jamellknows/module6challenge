@@ -16,7 +16,8 @@ The following image shows the web application's appearance and functionality:
 
 ## Instructions
 
-coming soon!
+Click on start quiz to start!
+Answer all the questions before 120 seconds and submit to finish
 
 
 
