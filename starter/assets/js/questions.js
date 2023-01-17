@@ -174,7 +174,7 @@ function Tally()
         if(answersArr[questionNumber-2] == option)
         {
             score=score+20
-            playCorrect()
+            // playCorrect()
             
          
 
@@ -182,7 +182,7 @@ function Tally()
         if(answersArr[questionNumber-2] != option)
         {
             score=score-10
-            playIncorrect()
+            // playIncorrect()
 
     
         }
@@ -209,18 +209,23 @@ submitInitialsEl.addEventListener('click', Store)
 
 function Store()
 {
+    let initials = initalsEl.value
+    let cqs 
     // so make an object that 
     if(typeof codingQuizScores === 'object')
     {
-        console.log('object')
+    
+        codingQuizScores[`${initials}`] = score
+        codingQuizScores = JSON.stringify(codingQuizScores)
+        localStorage.setItem("codingQuizScores", codingQuizScores)
 
     }else{
+        codingQuizScores = JSON.parse(codingQuizScores)
+        codingQuizScores[`${initials}`] = score
+        codingQuizScores = JSON.stringify(codingQuizScores)
+        localStorage.setItem("codingQuizScores", codingQuizScores)
 
-        // let initals = initalsEl.value
-        // console.log(initals)
-        // console.log(score)
-        // cqs[`${initalsEl.value}`] = score
-        // console.log(cqs)
+      
     }
     // let cqs = JSON.parse(codingQuizScores)
   
@@ -234,17 +239,17 @@ function Store()
 }
 
 
-function playCorrect()
-{
-    var audio = new Audio('')
-    audio.play()
-}
+// function playCorrect()
+// {
+//     var audio = new Audio('')
+//     audio.play()
+// }
 
-function playIncorrect()
-{
-    var audio = new Audio('../sfx/incorrect.wav')
-    audio.play()
-}
+// function playIncorrect()
+// {
+//     var audio = new Audio('../sfx/incorrect.wav')
+//     audio.play()
+// }
 // store scores and retrieve them to display when highscores is clicked 
 
 
