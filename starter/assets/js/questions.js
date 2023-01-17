@@ -9,7 +9,8 @@ let questionNumber = 1;
 const buttonsEl = document.createElement("div")
 const prevQuestionEl = document.createElement("button")
 const nextQuestionEl = document.createElement("button")
-
+const submitTestEl = document.createElement("button")
+submitTestEl.style.display = "none"
 let timeEl = document.getElementById("time")
 let time = 0;
 let score = 0
@@ -70,6 +71,7 @@ function renderQuestions()
     let question3 = JSON.stringify(Object.values(questionsObj[questionNumber])[0][2])
     let question4 = JSON.stringify(Object.values(questionsObj[questionNumber])[0][3])
     Tally()
+  
 
    
 
@@ -101,6 +103,13 @@ nextQuestionEl.addEventListener('click', function()
     else{
         renderQuestions()
     }
+    if(questionNumber == Object.keys(questionsObj).length)
+    {
+        nextQuestionEl.style.display = "none"
+        submitTestEl.style.display = "block"
+        submitTestEl.textContent = "Submit Test"
+        buttonsEl.appendChild(submitTestEl)
+    }
     // on click get value if on last question submit button 
     // check if right answer store value summate
 
@@ -118,6 +127,10 @@ if(questionNumber > 0)
 else{
     renderQuestions()
     
+}
+if(questionNumber != Object.keys(questionsObj).length)
+{
+    nextQuestionEl.style.display = "block"
 }
 })
 
@@ -140,6 +153,10 @@ function Tally()
         console.log(`You were not correct your score is ${score}`)
 
     }
-    // check if right score against the answer 
 }
+
+// add finished button at the end 
+// calculate score with time
+// store scores and retrieve them to display when highscores is clicked 
+
 
