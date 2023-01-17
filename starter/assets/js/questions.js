@@ -4,16 +4,36 @@ let questionTitleEl = document.getElementById("question-title")
 
 let choicesEl = document.getElementById("choices")
 
+let endScreenEl = document.getElementById('end-screen')
+
 let startEl = document.getElementById("start-screen")
+
+let submitInitialsEl = document.getElementById('submit')
+
+let initalsEl = document.getElementById('initials')
+
+let codingQuizScores = localStorage.getItem('codingQuizScores')
+
+
+
+if(codingQuizScores == null)
+{
+    codingQuizScores = {}
+}
+
+
+
 let questionNumber = 1;
 const buttonsEl = document.createElement("div")
 const prevQuestionEl = document.createElement("button")
 const nextQuestionEl = document.createElement("button")
 const submitTestEl = document.createElement("button")
+submitTestEl.textContent = "Submit Test"
 submitTestEl.style.display = "none"
 let timeEl = document.getElementById("time")
 let time = 0;
 let score = 0
+var timer
 
 
 const questionsObj = {
@@ -46,15 +66,19 @@ function questions()
     startEl.style.display = "none"
     questionsEl.classList.remove("hide")
     renderQuestions()
-    var timer = setInterval(function(){
+    timer = setInterval(function(){
         time++
         timeEl.textContent =`${time}`
     }, 1000)
+ 
+  
+
     
 }
 
 function renderQuestions()
 {
+   
  
     nextQuestionEl.innerText = "Next Question"
     prevQuestionEl.innerText = "Previous Question"
@@ -107,9 +131,9 @@ nextQuestionEl.addEventListener('click', function()
     {
         nextQuestionEl.style.display = "none"
         submitTestEl.style.display = "block"
-        submitTestEl.textContent = "Submit Test"
         buttonsEl.appendChild(submitTestEl)
     }
+    
     // on click get value if on last question submit button 
     // check if right answer store value summate
 
@@ -136,27 +160,91 @@ if(questionNumber != Object.keys(questionsObj).length)
 
 function Tally()
 {
-    let e = document.getElementById("answers")
-    console.log(`For ${questionNumber} the correct answer is ${answersArr[questionNumber-1]}`)
-    if(e === null){
-        return 
-    }
-    let option = e.value 
-    if(answersArr[questionNumber-2] == option)
+    if(questionNumber == 1)
     {
-        score++
-        console.log(`You were correct your score is ${score}`)
+        prevQuestionEl.style.display = "none"
     }
-    if(answersArr[questionNumber-2] != option)
-    {
-        score--
-        console.log(`You were not correct your score is ${score}`)
+    else{
+        prevQuestionEl.style.display = "block"
+        let e = document.getElementById("answers")
+        if(e === null){
+            return 
+        }
+        let option = e.value 
+        if(answersArr[questionNumber-2] == option)
+        {
+            score=score+20
+            playCorrect()
+            
+         
+
+        }
+        if(answersArr[questionNumber-2] != option)
+        {
+            score=score-10
+            playIncorrect()
+
+    
+        }
 
     }
+ 
 }
 
-// add finished button at the end 
-// calculate score with time
+function Calculate()
+{
+    clearInterval(timer)
+    score = (120 - time) + score
+    questionsEl.classList.add('hide')
+    endScreenEl.classList.remove('hide')
+    let finalScoreEl = document.getElementById('final-score')
+    finalScoreEl.textContent = `${score}`
+    
+
+  
+    
+}
+submitTestEl.addEventListener('click', Calculate)
+submitInitialsEl.addEventListener('click', Store)
+
+function Store()
+{
+    // so make an object that 
+    if(typeof codingQuizScores === 'object')
+    {
+        console.log('object')
+
+    }else{
+
+        // let initals = initalsEl.value
+        // console.log(initals)
+        // console.log(score)
+        // cqs[`${initalsEl.value}`] = score
+        // console.log(cqs)
+    }
+    // let cqs = JSON.parse(codingQuizScores)
+  
+
+    // localStorage.setItem("codingQuizScores", cqs)
+    
+    
+
+
+
+}
+
+
+function playCorrect()
+{
+    var audio = new Audio('')
+    audio.play()
+}
+
+function playIncorrect()
+{
+    var audio = new Audio('../sfx/incorrect.wav')
+    audio.play()
+}
 // store scores and retrieve them to display when highscores is clicked 
 
 
