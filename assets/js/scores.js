@@ -7,7 +7,7 @@ for(let i = 0; i < Object.keys(previousScores).length; i++)
 {
    
     let scoresEl = document.createElement('li')
-    scoresEl.textContent = `${initals[i]}:${scores[i]}`
+    scoresEl.textContent = `  ${initals[i]} : ${scores[i]}`
     highscoresEl.appendChild(scoresEl)
 }
 

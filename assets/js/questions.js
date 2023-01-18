@@ -182,6 +182,7 @@ function Tally()
         if(answersArr[questionNumber-2] == option)
         {
             score=score+20
+            playCorrect()
             
          
 
@@ -189,6 +190,7 @@ function Tally()
         if(answersArr[questionNumber-2] != option)
         {
             score=score-10
+            playIncorrect()
         }
 
     }
@@ -228,6 +230,8 @@ function Store()
 
       
     }
+
+    location.href = 'highscores.html'
    
     
 
@@ -235,18 +239,25 @@ function Store()
 
 }
 
+initalsEl.addEventListener('keypress', function(e){
+    if(e.keyCode === 13)
+    {
+        Store()
+    }
+})
 
-// function playCorrect()
-// {
-//     var audio = new Audio('')
-//     audio.play()
-// }
+function playCorrect()
+{
+    var audio = new Audio('/assets/sfx/correct.wav')
+    audio.play()
+}
 
-// function playIncorrect()
-// {
-//     var audio = new Audio('../sfx/incorrect.wav')
-//     audio.play()
-// }
+function playIncorrect()
+{
+
+    var audio = new Audio('/assets/sfx/incorrect.wav')
+    audio.play()
+}
 // store scores and retrieve them to display when highscores is clicked 
 
 
